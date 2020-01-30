@@ -23,11 +23,29 @@ const onSignIn = function (event) {
 const onSignOut = function () {
   api.signOut()
     .then(ui.signOutSuccessful)
-    .catch(console.log('Error'))
+    .catch()
 }
 
-const showChangePassword = function () {}
-const onChangePassword = function () {}
+const showChangePassword = function () {
+  $('#change-password-forms').show()
+  $('#change-password-button').hide()
+}
+
+const onChangePassword = function (event) {
+  event.preventDefault()
+  const form = event.target
+  const data = getFormFields(form)
+  api.changePassword(data)
+    .then(ui.changePasswordSuccessful)
+    .catch(ui.changePasswordFailed)
+}
+
+const onExploreRestaurants = function (event) {
+  event.preventDefault()
+  api.getRestaurants()
+    .then(ui.getRestaurantsSuccess)
+    .catch()
+}
 
 const addEventHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
@@ -35,6 +53,7 @@ const addEventHandlers = function () {
   $('#sign-out').on('click', onSignOut)
   $('#change-password-forms').on('submit', onChangePassword)
   $('#change-password-button').on('click', showChangePassword)
+  $('#exploreRestaurantsButton').on('click', onExploreRestaurants)
 }
 
 module.exports = {

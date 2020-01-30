@@ -16,7 +16,8 @@
 <body>
   <h1>TasteBuds</h1>
 
-  <div class="container" id="homepage">
+  <main>
+  <div class="container" id="homepage-buttons">
 
     <div class="row">
       <form class="input-group" id="sign-up">
@@ -43,6 +44,20 @@
 
   </div>
 
+    <div class="fav-buttons">
+      <button id="getFavoritesButton" class="btn btn-info mr-2">View Your Favorites</button>
+      <!-- <button id="addToFavoritesButton" class="btn btn-info mr-2">Add To Favorites</button> -->
+      <button id="clearFavoritesButton" class="btn btn-info mr-2">Clear Favorites</button>
+    </div>
+    <div id="favorites-content" class="favorites"></div>
+
+    <div class="restaurant-buttons">
+      <button id="exploreRestaurantsButton" class="btn btn-info mr-2">Explore Our Restaurants</button>
+      <button id="hideRestaurantsButton" class="btn btn-info mr-2">Hide Restaurants</button>
+      <div id="restaurants-content" class="restaurants"></div>
+    </div>
+  </main>
+
   <footer>
     <div class="container" id="footer">
       <div class="row">
@@ -58,8 +73,8 @@
     <div class="row">
       <form class="col-12 mb-2 change-password" id="change-password-forms">
         <fieldset>
-          <input class="credentials" name="password[old]" type="password" placeholder="old password" required>
-          <input class="credentials" name="password[new]" type="password" placeholder="new password" required>
+          <input class="credentials" name="credentials[old]" type="password" placeholder="old password" required>
+          <input class="credentials" name="credentials[new]" type="password" placeholder="new password" required>
           <input class="btn btn-outline-light" type="submit" value="Change Password">
           <p class="change-password-message"></p>
         </fieldset>

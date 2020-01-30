@@ -1,0 +1,15 @@
+{{#each locations as |location|}}
+  {{log location}}
+  <section data-id="{{location.id}}">
+    <h3>
+      {{limit location.name 20}}
+    </h3>
+    <h6>{{location.cuisine}}</h6>
+    <p>
+      {{#if location.notes}}
+        {{location.notes}}
+      {{/if}}
+    </p>
+  </section>
+
+{{/each}}

@@ -27,8 +27,28 @@ const signOut = function () {
   })
 }
 
+const changePassword = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/change-password',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: data
+  })
+}
+
+const getRestaurants = function () {
+  return $.ajax({
+    url: config.apiUrl + '/locations',
+    method: 'GET'
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  changePassword,
+  getRestaurants
 }

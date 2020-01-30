@@ -9,6 +9,8 @@ const events = require('./events.js')
 
 $(() => {
   events.addEventHandlers()
+  $('.fav-buttons').hide()
+  $('#hideRestaurantsButton').hide()
   $('#footer').hide()
   $('#change-password-forms').hide()
 })
