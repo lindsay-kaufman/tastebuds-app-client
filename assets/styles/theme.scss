@@ -1,0 +1,44 @@
+@import 'variables';
+
+body {
+  background-color: $main-color;
+  font-family: 'Bree Serif', serif;
+}
+
+main {
+
+  section {
+
+    border: 1px solid #FFFFFF;
+    cursor: pointer;
+    margin: -1px;
+    outline: none;
+    padding: 1rem;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+h1 {
+  color: #FFFFFF;
+  font-family: 'Lobster Two', cursive;
+  font-size: 70px;
+  text-align: center;
+}
+
+#homepage-buttons {
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+}
+
+#userpage {
+  color: #FFFFFF;
+  margin: 0 auto;
+}

@@ -1,20 +1,15 @@
-<!-- {{#each favorites as |favorite|}}
+{{#each favorites as |favorite|}}
   {{log favorite}}
-  <section data-id="{{favorite.id}}"> -->
-    <!-- <h6>name of restaurant</h6>   -->
-    <!-- <h3>
-      {{limit favorite.name 20}}
-    </h3> -->
-    <!-- <h6>type of restaurant</h6> -->
-    <!-- <p>
+  <section data-id="{{favorite.id}}">
+    <h3>
+      {{favorite.location.name}}
+    </h3>
+    <h6>{{favorite.location.cuisine}}</h6>
+    <p>
       {{#if favorite.notes}}
         {{favorite.notes}}
-      {{else}}
-        No notes provided.
       {{/if}}
     </p>
-    {{> update id=favorite.id}}
-    {{> delete id=favorite.id}}
   </section>
 
-{{/each}} -->
+{{/each}}

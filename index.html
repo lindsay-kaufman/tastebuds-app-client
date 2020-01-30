@@ -16,13 +16,12 @@
 <body>
   <h1>TasteBuds</h1>
 
-  <main>
-  <div class="container" id="homepage-buttons">
+  <div class="container">
 
     <div class="row">
+      <p class="homepage-message"></p>
       <form class="input-group" id="sign-up">
         <fieldset>
-          <p class="sign-up-message"></p>
           <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[email]" type="email" placeholder="email" required>
           <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[password]" type="password" placeholder="password" required>
           <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[password_confirmation]" type="password" placeholder="confirm password" required>
@@ -34,7 +33,6 @@
     <div class="row">
       <form class="input-group" id="sign-in">
         <fieldset>
-          <p class="sign-in-message"></p>
           <input class="col-8 col-lg-4 mb-2 credentials" name="credentials[email]" type="email" placeholder="email" required>
           <input class="col-8 col-lg-4 mb-2 credentials" name="credentials[password]" type="password" placeholder="password" required>
           <input type="submit" class="col-6 col-lg-2 btn btn-outline-light" value="Sign In">
@@ -44,10 +42,10 @@
 
   </div>
 
+  <main>
     <div class="fav-buttons">
       <button id="getFavoritesButton" class="btn btn-info mr-2">View Your Favorites</button>
-      <!-- <button id="addToFavoritesButton" class="btn btn-info mr-2">Add To Favorites</button> -->
-      <button id="clearFavoritesButton" class="btn btn-info mr-2">Clear Favorites</button>
+      <button id="clearFavoritesButton" class="btn btn-info mr-2">Hide Favorites</button>
     </div>
     <div id="favorites-content" class="favorites"></div>
 
@@ -73,8 +71,8 @@
     <div class="row">
       <form class="col-12 mb-2 change-password" id="change-password-forms">
         <fieldset>
-          <input class="credentials" name="credentials[old]" type="password" placeholder="old password" required>
-          <input class="credentials" name="credentials[new]" type="password" placeholder="new password" required>
+          <input class="passwords" name="passwords[old]" type="password" placeholder="old password" required>
+          <input class="passwords" name="passwords[new]" type="password" placeholder="new password" required>
           <input class="btn btn-outline-light" type="submit" value="Change Password">
           <p class="change-password-message"></p>
         </fieldset>

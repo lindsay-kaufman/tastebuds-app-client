@@ -45,10 +45,21 @@ const getRestaurants = function () {
   })
 }
 
+const getFavorites = () => {
+  return $.ajax({
+    url: config.apiUrl + '/favorites',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
-  getRestaurants
+  getRestaurants,
+  getFavorites
 }

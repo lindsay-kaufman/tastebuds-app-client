@@ -45,6 +45,40 @@ const onExploreRestaurants = function (event) {
   api.getRestaurants()
     .then(ui.getRestaurantsSuccess)
     .catch()
+
+  $('#exploreRestaurantsButton').hide()
+  $('#hideRestaurantsButton').show()
+}
+
+const onHideRestaurants = function () {
+  $('#restaurants-content').hide()
+  $('#hideRestaurantsButton').hide()
+  $('#exploreRestaurantsButton').show()
+}
+
+const onViewFavorites = (event) => {
+  event.preventDefault()
+  api.getFavorites()
+    .then(ui.getFavoritesSuccess)
+    .catch(ui.failure)
+
+  $('#clearFavoritesButton').show()
+  $('#getFavoritesButton').hide()
+  $('#favorites-content').show()
+}
+
+const onHideFavorites = () => {
+  $('#clearFavoritesButton').hide()
+  $('#getFavoritesButton').show()
+  $('#favorites-content').hide()
+}
+
+const onAddFavorite = (event) => {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  api.addToFavorites(id)
+    .then(() => onViewFavorites(event))
+    .catch(ui.failure)
 }
 
 const addEventHandlers = function () {
@@ -54,6 +88,10 @@ const addEventHandlers = function () {
   $('#change-password-forms').on('submit', onChangePassword)
   $('#change-password-button').on('click', showChangePassword)
   $('#exploreRestaurantsButton').on('click', onExploreRestaurants)
+  $('#hideRestaurantsButton').on('click', onHideRestaurants)
+  $('#getFavoritesButton').on('click', onViewFavorites)
+  $('#restaurants-content').on('click', '#add-favorite', onAddFavorite)
+  $('#clearFavoritesButton').on('click', onHideFavorites)
 }
 
 module.exports = {
