@@ -1,1 +1,29 @@
 @import '~bootstrap/scss/bootstrap';
+@import 'variables';
+
+body {
+  background-color: $main-color;
+  font-family: 'Bree Serif', serif;
+}
+
+h1 {
+  color: #FFFFFF;
+  font-family: 'Lobster Two', cursive;
+  font-size: 70px;
+  text-align: center;
+}
+
+#homepage {
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.input-group {
+  justify-content: center;
+}
+
+
+#userpage {
+  color: #FFFFFF;
+  margin: 0 auto;
+}
