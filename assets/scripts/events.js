@@ -58,6 +58,7 @@ const onExploreRestaurants = function (event) {
 }
 
 const onHideRestaurants = function () {
+  $('.restaurants-title').hide()
   $('#restaurants-content').hide()
   $('#hideRestaurantsButton').hide()
   $('#exploreRestaurantsButton').show()
@@ -71,13 +72,13 @@ const onViewFavorites = (event) => {
 
   $('#clearFavoritesButton').show()
   $('#getFavoritesButton').hide()
-  $('#favorites-content').show()
 }
 
 const onHideFavorites = () => {
   $('#clearFavoritesButton').hide()
   $('#getFavoritesButton').show()
   $('#favorites-content').hide()
+  $('.favorites-title').hide()
 }
 
 const onAddFavorite = (event) => {

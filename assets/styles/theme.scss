@@ -87,6 +87,14 @@ main {
 
 }
 
+.restaurants-title,
+.favorites-title {
+  color: $white;
+  font-family: 'Lobster Two', cursive;
+  font-size: 45px;
+  text-align: center;
+}
+
 footer {
   display: flex;
   justify-content: center;
