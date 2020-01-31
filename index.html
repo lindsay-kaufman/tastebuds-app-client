@@ -14,12 +14,18 @@
 </head>
 
 <body>
+  <nav>
   <h1>TasteBuds</h1>
+  <div class="fav-buttons">
+    <button id="getFavoritesButton" class="btn btn-outline-light">View Your Favorites</button>
+    <button id="clearFavoritesButton" class="btn btn-outline-light">Hide Favorites</button>
+    <button id="exploreRestaurantsButton" class="btn btn-outline-light">Explore Our Restaurants</button>
+    <button id="hideRestaurantsButton" class="btn btn-outline-light">Hide Restaurants</button>
+  </div>
+</nav>
 
-  <div class="container">
-
+  <div class="container" id="homepage">
     <div class="row">
-      <p class="homepage-message"></p>
       <form class="input-group" id="sign-up">
         <fieldset>
           <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[email]" type="email" placeholder="email" required>
@@ -29,7 +35,6 @@
         </fieldset>
       </form>
     </div>
-
     <div class="row">
       <form class="input-group" id="sign-in">
         <fieldset>
@@ -39,49 +44,31 @@
         </fieldset>
       </form>
     </div>
-
   </div>
+  <p class="homepage-message"></p>
 
   <main>
-    <div class="fav-buttons">
-      <button id="getFavoritesButton" class="btn btn-info mr-2">View Your Favorites</button>
-      <button id="clearFavoritesButton" class="btn btn-info mr-2">Hide Favorites</button>
-    </div>
     <div id="favorites-content" class="favorites"></div>
-
-    <div class="restaurant-buttons">
-      <button id="exploreRestaurantsButton" class="btn btn-info mr-2">Explore Our Restaurants</button>
-      <button id="hideRestaurantsButton" class="btn btn-info mr-2">Hide Restaurants</button>
-      <div id="restaurants-content" class="restaurants"></div>
-    </div>
+    <div id="restaurants-content" class="restaurants"></div>
   </main>
 
   <footer>
-    <div class="container" id="footer">
-      <div class="row">
-        <form class="col-12 col-lg-4 mb-2" id="sign-out">
-          <input class="btn btn-outline-light" type="button" value="Sign Out">
-        </form>
-        <form class="col-12 col-lg-4 mb-2" id="change-password-button">
-          <input class="btn btn-outline-light" type="button" value="Change Password">
-        </form>
-      </div>
+    <div class="footer-buttons" id="footer">
+      <button id="sign-out" class="btn btn-outline-light">Sign Out</button>
+      <button id="change-password-button" class="btn btn-outline-light">Change Password</button>
     </div>
-
-    <div class="row">
+        <div>
       <form class="col-12 mb-2 change-password" id="change-password-forms">
         <fieldset>
           <input class="passwords" name="passwords[old]" type="password" placeholder="old password" required>
           <input class="passwords" name="passwords[new]" type="password" placeholder="new password" required>
           <input class="btn btn-outline-light" type="submit" value="Change Password">
-          <p class="change-password-message"></p>
         </fieldset>
       </form>
     </div>
-
+    <div><p class="change-password-message"></p></div>
   </footer>
 
 </body>
-
 
 </html>
