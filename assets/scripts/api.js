@@ -55,11 +55,46 @@ const getFavorites = () => {
   })
 }
 
+const addToFavorites = (data) => {
+  return $.ajax({
+    url: config.apiUrl + '/favorites',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: data
+  })
+}
+
+const updateFavorites = (id, data) => {
+  return $.ajax({
+    url: config.apiUrl + '/favorites/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: data
+  })
+}
+
+const removeFavorite = (id) => {
+  return $.ajax({
+    url: config.apiUrl + '/favorites/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
   getRestaurants,
-  getFavorites
+  getFavorites,
+  addToFavorites,
+  updateFavorites,
+  removeFavorite
 }

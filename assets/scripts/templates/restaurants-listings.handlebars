@@ -1,5 +1,4 @@
 {{#each locations as |location|}}
-  {{log location}}
   <section data-id="{{location.id}}">
     <h3>
       {{limit location.name 20}}
@@ -10,6 +9,7 @@
         {{location.notes}}
       {{/if}}
     </p>
+    {{> create id=location.id }}
   </section>
 
 {{/each}}

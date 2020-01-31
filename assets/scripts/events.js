@@ -76,7 +76,27 @@ const onHideFavorites = () => {
 const onAddFavorite = (event) => {
   event.preventDefault()
   const id = $(event.target).data('id')
+  console.log(id)
+  console.log(event.target.data)
   api.addToFavorites(id)
+    .then(() => onViewFavorites(event))
+    .catch(ui.failure)
+}
+
+const onUpdateFavorite = (event) => {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  const form = event.target
+  const data = getFormFields(form)
+  api.updateFavorites(id, data)
+    .then(() => onViewFavorites(event))
+    .catch(ui.failure)
+}
+
+const onRemoveFavorite = (event) => {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  api.removeFavorite(id)
     .then(() => onViewFavorites(event))
     .catch(ui.failure)
 }
@@ -90,7 +110,9 @@ const addEventHandlers = function () {
   $('#exploreRestaurantsButton').on('click', onExploreRestaurants)
   $('#hideRestaurantsButton').on('click', onHideRestaurants)
   $('#getFavoritesButton').on('click', onViewFavorites)
-  $('#restaurants-content').on('click', '#add-favorite', onAddFavorite)
+  $('#restaurants-content').on('click', '.create', onAddFavorite)
+  $('#favorites-content').on('submit', '.update-favorite', onUpdateFavorite)
+  $('#favorites-content').on('click', '.remove', onRemoveFavorite)
   $('#clearFavoritesButton').on('click', onHideFavorites)
 }
 

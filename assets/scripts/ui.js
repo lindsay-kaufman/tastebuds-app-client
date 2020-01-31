@@ -17,11 +17,13 @@ const signUpFailed = function () {
 const signInSuccessful = function (response) {
   store.user = response.user
   $('#footer').show()
+  $('#change-password-button').show()
+  $('#exploreRestaurantsButton').show()
+  $('#getFavoritesButton').show()
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.homepage-message').hide()
-  $('#getFavoritesButton').show()
-  // console.log('Successful Sign In')
+  // // console.log('Successful Sign In')
 }
 
 const signInFailed = function () {
@@ -32,11 +34,12 @@ const signInFailed = function () {
 }
 
 const signOutSuccessful = function () {
-  $('#footer').hide()
   $('#sign-in').show()
   $('#sign-up').show()
+  $('#footer').hide()
   $('.change-password-message').hide()
-  $('$change-password-forms').hide()
+  $('#change-password-forms').hide()
+  $('#exploreRestaurantsButton').hide()
   $('#getFavoritesButton').hide()
   $('#clearFavoritesButton').hide()
   $('#favorites-content').hide()
@@ -57,16 +60,20 @@ const changePasswordFailed = function () {
 }
 
 const getRestaurantsSuccess = function (data) {
-  // console.log(data)
+  // // console.log(data)
   const locationsHTML = restaurantsTemplate({ locations: data.locations })
   $('#restaurants-content').show().html(locationsHTML)
 }
 
 const getFavoritesSuccess = (response) => {
-  console.log(response)
+  // console.log(response)
   const favoritesHTML = favoritesTemplate({ favorites: response.favorites })
-  console.log(favoritesHTML)
+  // console.log(favoritesHTML)
   $('#favorites-content').html(favoritesHTML)
+}
+
+const failure = (error) => {
+  console.error(error)
 }
 
 module.exports = {
@@ -78,5 +85,6 @@ module.exports = {
   changePasswordSuccessful,
   changePasswordFailed,
   getRestaurantsSuccess,
-  getFavoritesSuccess
+  getFavoritesSuccess,
+  failure
 }

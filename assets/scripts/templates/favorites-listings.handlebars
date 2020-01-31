@@ -1,15 +1,14 @@
 {{#each favorites as |favorite|}}
-  {{log favorite}}
   <section data-id="{{favorite.id}}">
-    <h3>
-      {{favorite.location.name}}
-    </h3>
-    <h6>{{favorite.location.cuisine}}</h6>
     <p>
-      {{#if favorite.notes}}
-        {{favorite.notes}}
+      <h4> {{favorite.location.name}} </h4>
+      {{favorite.location.cuisine}}
+      <h6> Comments: {{#if favorite.notes}}
+          {{favorite.notes}} </h6>
       {{/if}}
     </p>
+
+    <div> {{> update id=favorite.id}} {{> remove id=favorite.id}} </div>
   </section>
 
 {{/each}}
