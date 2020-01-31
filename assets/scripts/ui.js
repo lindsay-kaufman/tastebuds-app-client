@@ -46,10 +46,14 @@ const signOutSuccessful = function () {
 }
 
 const changePasswordSuccessful = function (response) {
-  store.user = response.user
+  // console.log(response)
+  $('#cancel-change-password').hide()
   $('#change-password-forms').hide()
   $('#change-password-button').show()
-  $('.change-password-message').show().html('Password has been changed!')
+  $('.change-password-message').show().html('Your password has been updated!')
+  $('#change-password-forms').each(function () {
+    this.reset()
+  })
 }
 
 const changePasswordFailed = function () {

@@ -28,7 +28,14 @@ const onSignOut = function () {
 
 const showChangePassword = function () {
   $('#change-password-forms').show()
+  $('#cancel-change-password').show()
   $('#change-password-button').hide()
+}
+
+const cancelChangePassword = () => {
+  $('#change-password-forms').hide()
+  $('#cancel-change-password').hide()
+  $('#change-password-button').show()
 }
 
 const onChangePassword = function (event) {
@@ -75,10 +82,9 @@ const onHideFavorites = () => {
 
 const onAddFavorite = (event) => {
   event.preventDefault()
-  const id = $(event.target).data('id')
-  console.log(id)
-  console.log(event.target.data)
-  api.addToFavorites(id)
+  const location = $(event.target).data('id')
+  console.log(location)
+  api.addToFavorites(location)
     .then(() => onViewFavorites(event))
     .catch(ui.failure)
 }
@@ -107,10 +113,11 @@ const addEventHandlers = function () {
   $('#sign-out').on('click', onSignOut)
   $('#change-password-forms').on('submit', onChangePassword)
   $('#change-password-button').on('click', showChangePassword)
+  $('#cancel-change-password').on('click', cancelChangePassword)
   $('#exploreRestaurantsButton').on('click', onExploreRestaurants)
   $('#hideRestaurantsButton').on('click', onHideRestaurants)
   $('#getFavoritesButton').on('click', onViewFavorites)
-  $('#restaurants-content').on('click', '.create', onAddFavorite)
+  $('#restaurants-content').on('click', '.create-favorite', onAddFavorite)
   $('#favorites-content').on('submit', '.update-favorite', onUpdateFavorite)
   $('#favorites-content').on('click', '.remove', onRemoveFavorite)
   $('#clearFavoritesButton').on('click', onHideFavorites)

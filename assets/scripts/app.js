@@ -15,4 +15,7 @@ $(() => {
   $('#hideRestaurantsButton').hide()
   $('#footer').hide()
   $('#change-password-forms').hide()
+  $('#cancel-change-password').hide()
+  $('#password-success-message').hide()
+  $('#password-fail-message').hide()
 })

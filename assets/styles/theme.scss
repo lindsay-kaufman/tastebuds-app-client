@@ -50,24 +50,41 @@ main {
     }
     background: darken($main-color, 15%);
     border: 1px solid $white;
+    height: 135px;
     margin: auto;
-    padding: 15px;
     outline: none;
 
     p {
-      margin-bottom: 0;
+      margin-bottom: 5px;
     }
   }
 
-  .favorites-content,
-  .restaurants-content {
+  #favorites-content {
     @include make-row;
     line-height: 0.85;
+    max-height: 700px;
+    outline: none;
     overflow: scroll;
-    overflow-y: hidden;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+
+    section {
+      height: 180px;
+    }
+  }
+
+  #restaurants-content {
+    @include make-row;
+    line-height: 0.85;
+    max-height: 700px;
+    outline: none;
+    overflow: scroll;
+    padding: 20px;
     text-align: center;
     width: 100%;
   }
+
 }
 
 footer {
