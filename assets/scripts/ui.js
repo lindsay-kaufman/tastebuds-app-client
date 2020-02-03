@@ -17,14 +17,12 @@ const signUpFailed = function () {
 const signInSuccessful = function (response) {
   store.user = response.user
   $('#footer').show()
-  $('#change-password-button').show()
   $('#exploreRestaurantsButton').show()
   $('#hideRestaurantsButton').hide()
   $('#getFavoritesButton').show()
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.homepage-message').hide()
-  // // console.log('Successful Sign In')
 }
 
 const signInFailed = function () {
@@ -38,8 +36,6 @@ const signOutSuccessful = function () {
   $('#sign-in').show()
   $('#sign-up').show()
   $('#footer').hide()
-  $('.change-password-message').hide()
-  $('#change-password-forms').hide()
   $('#exploreRestaurantsButton').hide()
   $('#hideRestaurantsButton').hide()
   $('#getFavoritesButton').hide()
@@ -51,17 +47,13 @@ const signOutSuccessful = function () {
 }
 
 const changePasswordSuccessful = (response) => {
-  // console.log(response)
-  $('#cancel-change-password').hide()
-  $('#change-password-forms').hide()
-  $('#change-password-button').show()
   $('.change-password-message').show().html('Your password has been updated!')
   $('#change-password-forms').each(function () {
     this.reset()
   })
 }
 
-const changePasswordFailed = function () {
+const changePasswordFailed = () => {
   $('#change-password-forms').each(function () {
     this.reset()
   })
@@ -69,21 +61,21 @@ const changePasswordFailed = function () {
 }
 
 const getRestaurantsSuccess = function (data) {
-  // // console.log(data)
+  // // // console.log(data)
   $('.restaurants-title').show().html('Explore Our Restaurants')
   const locationsHTML = restaurantsTemplate({ locations: data.locations })
   $('#restaurants-content').show().html(locationsHTML)
 }
 
 const getFavoritesSuccess = (response) => {
-  // console.log(response)
+  // // console.log(response)
   $('.favorites-title').show().html('Favorite Spots')
   const favoritesHTML = favoritesTemplate({ favorites: response.favorites })
   $('#favorites-content').show().html(favoritesHTML)
 }
 
-const failure = (error) => {
-  console.error(error)
+const failure = () => {
+  // console.error(error)
 }
 
 module.exports = {
