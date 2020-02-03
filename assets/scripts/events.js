@@ -69,13 +69,19 @@ const onHideFavorites = () => {
   $('.favorites-title').hide()
 }
 
+const favorites = []
 const onAddFavorite = (event) => {
   event.preventDefault()
   const location = $(event.target).data('id')
   // console.log(location)
-  api.addToFavorites(location)
-    .then(() => onViewFavorites(event))
-    .catch(ui.failure)
+  if (favorites.includes(location)) {
+    return favorites
+  } else {
+    favorites.push(location)
+    api.addToFavorites(location)
+      .then(() => onViewFavorites(event))
+      .catch(ui.failure)
+  }
 }
 
 const onUpdateFavorite = (event) => {
