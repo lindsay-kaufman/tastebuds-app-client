@@ -4,126 +4,126 @@ body {
   background-color: $main-color;
   color: $white;
   font-family: 'Bree Serif', serif;
+  margin: auto;
+  width: 100%;
 
   p {
     font-size: 20px;
     text-align: center;
   }
-}
 
-nav {
-  background: darken($main-color, 15%);
-  color: $white;
-  outline: none;
-  padding: 1rem;
-
-  h1 {
+  nav {
+    background: darken($main-color, 15%);
     color: $white;
-    font-family: 'Lobster Two', cursive;
-    font-size: 70px;
-    text-align: center;
+    outline: none;
+    padding: 1rem;
+    width: 100%;
+
+    h1 {
+      color: $white;
+      font-family: 'Lobster Two', cursive;
+      font-size: 70px;
+      text-align: center;
+    }
+
+    .fav-buttons {
+      display: flex;
+      justify-content: center;
+    }
   }
 
-  .fav-buttons {
+  #homepage {
     display: flex;
     justify-content: center;
-  }
-}
-
-#homepage {
-  display: flex;
-  justify-content: center;
-  padding: 5rem 0 1rem;
-}
-
-main {
-  @include make-container;
-  @include make-container-max-widths;
-
-  section {
-    @include make-col-ready;
-    @include media-breakpoint-up(md) {
-      @include make-col(6);
-    }
-    @include media-breakpoint-up(lg) {
-      @include make-col(4);
-    }
-    background: darken($main-color, 15%);
-    border: 1px solid $white;
-    height: 135px;
-    margin: auto;
-    outline: none;
-
-    p {
-      margin-bottom: 5px;
-    }
+    padding: 5rem 0 1rem;
   }
 
-  #favorites-content {
-    @include make-row;
-    line-height: 0.85;
-    max-height: 700px;
-    outline: none;
-    overflow: scroll;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
+  main {
+    @include make-container;
+    @include make-container-max-widths;
 
     section {
-      height: 180px;
+      @include make-col-ready;
+      @include media-breakpoint-up(md) {
+        @include make-col(6);
+      }
+      @include media-breakpoint-up(lg) {
+        @include make-col(4);
+      }
+      background: darken($main-color, 15%);
+      border: 1px solid $white;
+      height: 135px;
+      margin: auto;
+      outline: none;
+
+      p {
+        margin-bottom: 5px;
+      }
+    }
+
+    #favorites-content {
+      @include make-row;
+      line-height: 0.85;
+      margin: auto;
+      max-height: 700px;
+      outline: none;
+      overflow: scroll;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+
+      section {
+        height: 180px;
+      }
+    }
+
+    #restaurants-content {
+      @include make-row;
+      line-height: 0.85;
+      max-height: 700px;
+      outline: none;
+      overflow: scroll;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
     }
   }
 
-  #restaurants-content {
-    @include make-row;
-    line-height: 0.85;
-    max-height: 700px;
-    outline: none;
-    overflow: scroll;
-    padding: 20px;
+  .favorites-title,
+  .restaurants-title {
+    color: $white;
+    font-family: 'Lobster Two', cursive;
+    font-size: 45px;
     text-align: center;
-    width: 100%;
   }
-}
 
-.favorites-title,
-.restaurants-title {
-  color: $white;
-  font-family: 'Lobster Two', cursive;
-  font-size: 45px;
-  text-align: center;
-}
+  footer {
+    padding: 5rem 0 1rem;
 
-footer {
-  // display: flex;
-  // justify-content: center;
-  padding: 5rem 0 1rem;
-
-  div {
-    display: block;
-  }
+    div {
+      display: block;
+    }
 
     #change-password-modal {
       padding: 20px;
       text-align: center;
 
-    .modal-header,
-    .change-password-message {
-      color: darken($main-color, 15%);
-      text-align: center;
+      .change-password-message,
+      .modal-header {
+        color: darken($main-color, 15%);
+        text-align: center;
+      }
+
+      #change-password-modal-button {
+        background-color: darken($main-color, 15%);
+        margin: 10px;
+      }
     }
 
-    #change-password-modal-button {
-      background-color: darken($main-color, 15%);
-      margin: 10px;
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
     }
-
-  }
-
-
-  .footer-buttons {
-    display: flex;
-    justify-content: center;
   }
 }
 
