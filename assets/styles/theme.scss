@@ -84,11 +84,10 @@ main {
     text-align: center;
     width: 100%;
   }
-
 }
 
-.restaurants-title,
-.favorites-title {
+.favorites-title,
+.restaurants-title {
   color: $white;
   font-family: 'Lobster Two', cursive;
   font-size: 45px;
@@ -96,13 +95,31 @@ main {
 }
 
 footer {
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   padding: 5rem 0 1rem;
 
   div {
     display: block;
   }
+
+    #change-password-modal {
+      padding: 20px;
+      text-align: center;
+
+    .modal-header,
+    .change-password-message {
+      color: darken($main-color, 15%);
+      text-align: center;
+    }
+
+    #change-password-modal-button {
+      background-color: darken($main-color, 15%);
+      margin: 10px;
+    }
+
+  }
+
 
   .footer-buttons {
     display: flex;
