@@ -69,7 +69,7 @@ const onHideFavorites = () => {
   $('.favorites-title').hide()
 }
 
-const favorites = []
+const favorites = [] // clears when user logs out
 const onAddFavorite = (event) => {
   event.preventDefault()
   const location = $(event.target).data('id')

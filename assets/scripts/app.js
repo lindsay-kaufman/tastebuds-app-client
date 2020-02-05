@@ -14,4 +14,5 @@ $(() => {
   $('#clearFavoritesButton').hide()
   $('#hideRestaurantsButton').hide()
   $('#footer').hide()
+  $('#map').hide()
 })

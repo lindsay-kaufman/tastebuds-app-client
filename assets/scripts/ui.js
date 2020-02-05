@@ -16,6 +16,7 @@ const signUpFailed = function () {
 
 const signInSuccessful = function (response) {
   store.user = response.user
+  $('#map').show()
   $('#footer').show()
   $('#exploreRestaurantsButton').show()
   $('#hideRestaurantsButton').hide()

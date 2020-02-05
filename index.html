@@ -11,6 +11,10 @@
   <!-- Do not add `script` tags-->
   <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+  <!-- Maps -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -50,6 +54,16 @@
   <main>
     <p class="favorites-title"></p>
     <div id="favorites-content" class="favorites"></div>
+
+    <div id='map' style='width: 500px; height: 400px;'></div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoibGluZHMyMzQiLCJhIjoiY2s2OXNkNDF4MGo0NzNrbGppa291YjJteSJ9.TZ8HxJeK3M7PW4K0eUNsrA';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+      });
+    </script>
+
     <p class="restaurants-title"></p>
     <div id="restaurants-content" class="restaurants"></div>
   </main>
