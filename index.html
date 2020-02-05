@@ -59,9 +59,14 @@
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoibGluZHMyMzQiLCJhIjoiY2s2OXNkNDF4MGo0NzNrbGppa291YjJteSJ9.TZ8HxJeK3M7PW4K0eUNsrA';
       var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11'
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-74.006, 40.71], // starting position
+        zoom: 9 // starting zoom
       });
+
+      // Add zoom and rotation controls to the map.
+      map.addControl(new mapboxgl.NavigationControl());
     </script>
 
     <p class="restaurants-title"></p>
