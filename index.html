@@ -15,6 +15,7 @@
   <!-- Maps -->
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 
 <body>
@@ -63,24 +64,44 @@
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     <div id='map' style='width: 500px; height: 400px;'></div>
 
+
     <script>
       mapboxgl.accessToken = 'pk.eyJ1IjoibGluZHMyMzQiLCJhIjoiY2s2OXNkNDF4MGo0NzNrbGppa291YjJteSJ9.TZ8HxJeK3M7PW4K0eUNsrA';
-      var map = new mapboxgl.Map({
+      const map = new mapboxgl.Map({
         container: 'map', // container id
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-74.006, 40.71], // starting position
         zoom: 9 // starting zoom
-      });
+      })
 
-      map.addControl(
+      const geocoder = map.addControl(
         new MapboxGeocoder({
           accessToken: mapboxgl.accessToken,
           mapboxgl: mapboxgl
         })
-      );
+      )
 
       // Add zoom and rotation controls to the map.
-      map.addControl(new mapboxgl.NavigationControl());
+      map.addControl(new mapboxgl.NavigationControl())
+
+
+
+      map.on('click', function(event) {
+        // creates DOM element for marker
+        const el = document.createElement('div')
+        el.id = 'marker'
+
+        // get coordinate of click
+        const coordinate = event.lngLat
+
+        // create new marker
+        new mapboxgl.Marker(el)
+          .setLngLat(coordinate)
+          .addTo(map)
+
+        console.log('Marker created')
+        console.log(coordinate)
+      })
 
     </script>
 
