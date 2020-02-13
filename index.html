@@ -11,12 +11,13 @@
   <!-- Do not add `script` tags-->
   <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-
-  <!-- Maps -->
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
-
-</head>
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+      background-color: white;
+    }
+  </style>
 
 <body>
   <nav>
@@ -56,54 +57,8 @@
     <p class="favorites-title"></p>
     <div id="favorites-content" class="favorites"></div>
 
-
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css" />
-    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-    <div id='map' style='width: 500px; height: 400px;'></div>
-
-
-    <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoibGluZHMyMzQiLCJhIjoiY2s2OXNkNDF4MGo0NzNrbGppa291YjJteSJ9.TZ8HxJeK3M7PW4K0eUNsrA';
-      const map = new mapboxgl.Map({
-        container: 'map', // container id
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-74.006, 40.71], // starting position
-        zoom: 9 // starting zoom
-      })
-
-      const geocoder = map.addControl(
-        new MapboxGeocoder({
-          accessToken: mapboxgl.accessToken,
-          mapboxgl: mapboxgl
-        })
-      )
-
-      // Add zoom and rotation controls to the map.
-      map.addControl(new mapboxgl.NavigationControl())
-
-
-
-      map.on('click', function(event) {
-        // creates DOM element for marker
-        const el = document.createElement('div')
-        el.id = 'marker'
-
-        // get coordinate of click
-        const coordinate = event.lngLat
-
-        // create new marker
-        new mapboxgl.Marker(el)
-          .setLngLat(coordinate)
-          .addTo(map)
-
-        console.log('Marker created')
-        console.log(coordinate)
-      })
-
-    </script>
+    <!-- Map -->
+    <div id='map'></div>
 
     <p class="restaurants-title"></p>
     <div id="restaurants-content" class="restaurants"></div>
@@ -153,6 +108,31 @@
 
 
   </footer>
+  <script>
+    // let map
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 42.358, lng: -71.059 },
+        zoom: 10
+      })
+
+      map.addListener('click', function(e) {
+        placeMarkerAndPanTo(e.latLng, map)
+      })
+    }
+
+      function placeMarkerAndPanTo(latLng, map) {
+        const marker = new google.maps.Marker({
+          position: latLng,
+          map: map
+        })
+        map.panTo(latLng)
+      }
+
+  </script>
+  <!-- Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8-eiMsBGW-FFpstCDSeIwTNwqkQRraKM&callback=initMap">
+  </script>
 </body>
 
 </html>
