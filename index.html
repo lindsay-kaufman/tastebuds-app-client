@@ -17,6 +17,15 @@
       height: 400px;
       background-color: white;
     }
+
+    #pac-input {
+      background-color: #fff;
+      font-size: 15px;
+      margin-left: 12px;
+      padding: 0 11px 0 13px;
+      text-overflow: ellipsis;
+      width: 400px
+    }
   </style>
 
 <body>
@@ -58,6 +67,9 @@
     <div id="favorites-content" class="favorites"></div>
 
     <!-- Map -->
+    <div>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  </div>
     <div id='map'></div>
 
     <p class="restaurants-title"></p>
@@ -109,29 +121,84 @@
 
   </footer>
   <script>
-    // let map
     function initMap() {
+      infoWindow = new google.maps.InfoWindow()
       map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 42.358, lng: -71.059 },
-        zoom: 10
+        center: {
+          lat: 42.358,
+          lng: -71.059
+        },
+        zoom: 12
       })
 
-      map.addListener('click', function(e) {
-        placeMarkerAndPanTo(e.latLng, map)
+      // Create the search box and link it to the input
+      const input = document.getElementById('pac-input')
+      const searchBox = new google.maps.places.SearchBox(input)
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
+
+      // Limit search results to maps current viewport
+      map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
       })
-    }
 
-      function placeMarkerAndPanTo(latLng, map) {
-        const marker = new google.maps.Marker({
-          position: latLng,
-          map: map
-        })
-        map.panTo(latLng)
-      }
+      // Listen for event when the user selects a place and return details
+      let markers = []
+      searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
 
+            if (places.length == 0) {
+              return;
+            }
+
+            // Clear out old markers
+            markers.forEach(function(marker) {
+              marker.setMap(null)
+            })
+            markers = []
+
+            // For each place, get the icon, name and location
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+              if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+              }
+              const icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+              };
+
+              // Create marker for each place
+              markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+              }))
+              if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+            })
+            map.fitBounds(bounds);
+            // const service = new google.maps.places.PlacesService(map)
+
+            //
+            //   google.maps.event.addListener(marker, 'click', function () {
+            //     infoWindow.setContent(place.name)
+            //     infoWindow.open(map, this)
+            //   })
+            // }
+          })
+        }
   </script>
   <!-- Maps -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8-eiMsBGW-FFpstCDSeIwTNwqkQRraKM&callback=initMap">
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC8-eiMsBGW-FFpstCDSeIwTNwqkQRraKM&callback=initMap">
   </script>
 </body>
 
