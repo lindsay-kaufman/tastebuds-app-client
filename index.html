@@ -80,7 +80,7 @@
     <div id="infowindow-content">
       <span id="place-name" class="title"></span><br>
       <span id="place-id"></span><br>
-      <span id="place-address"></span><br>
+      <span id="place-address"></span>
     </div>
 
     <p class="restaurants-title"></p>
@@ -154,7 +154,7 @@
       })
 
       // Data fields for autocomplete
-      autocomplete.setFields(['place_id', 'geometry', 'name'])
+      autocomplete.setFields(['name', 'place_id', 'formatted_address', 'geometry'])
 
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
 
@@ -190,11 +190,12 @@
           placeId: place.place_id,
           location: place.geometry.location
         })
+        console.log('Place id: ', place.place_id)
 
         marker.setVisible(true)
 
         infoWindowContent.children['place-name'].textContent = place.name
-        infoWindowContent.children['place-id'].textContent = place.place_id
+        infoWindowContent.children['place-id'] = place.place_id
         infoWindowContent.children['place-address'].textContent = place.formatted_address
         console.log(infoWindowContent)
         infoWindow.open(map, marker)
@@ -208,3 +209,8 @@
 </body>
 
 </html>
+
+<!-- To Do
+- Add button to infowindow-content
+  - button should have an on click event handler to push place.place_id into favorites
+-->
