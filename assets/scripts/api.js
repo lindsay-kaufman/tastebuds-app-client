@@ -41,7 +41,10 @@ const changePassword = function (data) {
 const getRestaurants = function () {
   return $.ajax({
     url: config.apiUrl + '/locations',
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
   })
 }
 

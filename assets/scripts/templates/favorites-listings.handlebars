@@ -1,5 +1,8 @@
+{{#if favorites}}
+
 {{#each favorites as |favorite|}}
   <section data-id="{{favorite.id}}">
+
     <p>
       <h4> {{favorite.location.name}} </h4>
       {{favorite.location.cuisine}} - {{favorite.location.area}}
@@ -10,5 +13,8 @@
 
     <div> {{> update id=favorite.id}} {{> remove id=favorite.id}} </div>
   </section>
-
 {{/each}}
+
+{{else}}
+<h4>Explore our restaurants to start adding restaurants to your favorites!</h4>
+{{/if}}

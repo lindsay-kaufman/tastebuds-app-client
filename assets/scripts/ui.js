@@ -61,14 +61,14 @@ const changePasswordFailed = () => {
 }
 
 const getRestaurantsSuccess = function (data) {
-  // // // console.log(data)
+  // console.log(data)
   $('.restaurants-title').show().html('Explore Our Restaurants')
   const locationsHTML = restaurantsTemplate({ locations: data.locations })
   $('#restaurants-content').show().html(locationsHTML)
 }
 
 const getFavoritesSuccess = (response) => {
-  // // console.log(response)
+  // console.log(response)
   $('.favorites-title').show().html('Favorite Spots')
   const favoritesHTML = favoritesTemplate({ favorites: response.favorites })
   $('#favorites-content').show().html(favoritesHTML)

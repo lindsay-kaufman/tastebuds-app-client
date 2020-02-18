@@ -1,6 +1,7 @@
 const getFormFields = require('../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const store = require('./store.js')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -69,19 +70,14 @@ const onHideFavorites = () => {
   $('.favorites-title').hide()
 }
 
-const favorites = []
 const onAddFavorite = (event) => {
   event.preventDefault()
   const location = $(event.target).data('id')
-  // console.log(location)
-  if (favorites.includes(location)) {
-    return favorites
-  } else {
-    favorites.push(location)
-    api.addToFavorites(location)
-      .then(() => onViewFavorites(event))
-      .catch(ui.failure)
-  }
+  // // console.log(location)
+  api.addToFavorites(location)
+    .then(() => onExploreRestaurants(event))
+    .then(() => onViewFavorites(event))
+    .catch(ui.failure)
 }
 
 const onUpdateFavorite = (event) => {
@@ -98,6 +94,7 @@ const onRemoveFavorite = (event) => {
   event.preventDefault()
   const id = $(event.target).data('id')
   api.removeFavorite(id)
+    .then(() => onExploreRestaurants(event))
     .then(() => onViewFavorites(event))
     .catch(ui.failure)
 }
