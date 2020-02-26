@@ -40,8 +40,6 @@
     <div class="fav-buttons">
       <button id="getFavoritesButton" class="btn btn-outline-light">View Your Favorites</button>
       <button id="clearFavoritesButton" class="btn btn-outline-light">Hide Favorites</button>
-      <button id="exploreRestaurantsButton" class="btn btn-outline-light">Explore Our Restaurants</button>
-      <button id="hideRestaurantsButton" class="btn btn-outline-light">Hide Restaurants</button>
     </div>
   </nav>
 
@@ -77,14 +75,8 @@
       <input id="pac-input" class="controls" type="text" placeholder="Search">
     </div>
     <div id='map'></div>
-    <div id="infowindow-content">
-      <span id="place-name" class="title"></span><br>
-      <span id="place-id"></span><br>
-      <span id="place-address"></span>
-    </div>
+  
 
-    <p class="restaurants-title"></p>
-    <div id="restaurants-content" class="restaurants"></div>
   </main>
 
   <footer>
@@ -160,20 +152,29 @@
 
 
       infoWindow = new google.maps.InfoWindow()
-      const infoWindowContent = document.getElementById('infowindow-content')
+      let infoWindowContent  
       infoWindow.setContent(infoWindowContent)
 
       const marker = new google.maps.Marker({ map: map })
       marker.addListener('click', function() {
         infoWindow.open(map, marker)
+    
       })
 
       // Listen for event when the user selects a place and return details
       autocomplete.addListener('place_changed', function() {
         infoWindow.close()
 
-        const place = autocomplete.getPlace()
 
+        const place = autocomplete.getPlace()
+          infoWindowContent = `
+          <div id="infowindow-content">
+            <span id="place-name" class="title">${place.name}</span><br>
+            <span id="place-id"></span><br>
+            <span id="place-address">${place.formatted_address}</span><br><br>
+            <span><button type="button" id="favorite-place-button">Add to Favorites</button></span>
+          </div>`
+        infoWindow.setContent(infoWindowContent)
         if (!place.geometry) {
           return
         }
@@ -190,14 +191,10 @@
           placeId: place.place_id,
           location: place.geometry.location
         })
-        console.log('Place id: ', place.place_id)
+        console.log('Place: ', place)
 
         marker.setVisible(true)
 
-        infoWindowContent.children['place-name'].textContent = place.name
-        infoWindowContent.children['place-id'] = place.place_id
-        infoWindowContent.children['place-address'].textContent = place.formatted_address
-        console.log(infoWindowContent)
         infoWindow.open(map, marker)
       })
 
@@ -211,6 +208,6 @@
 </html>
 
 <!-- To Do
-- Add button to infowindow-content
-  - button should have an on click event handler to push place.place_id into favorites
+  - button should have an on click event handler to push 'place' into favorites
+  - capture place object, send to api
 -->

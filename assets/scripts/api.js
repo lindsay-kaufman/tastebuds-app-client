@@ -1,7 +1,7 @@
 const config = require('./config.js')
 const store = require('./store.js')
 
-const signUp = function (data) {
+const signUp = function(data) {
   return $.ajax({
     url: config.apiUrl + '/sign-up',
     method: 'POST',
@@ -9,7 +9,7 @@ const signUp = function (data) {
   })
 }
 
-const signIn = function (data) {
+const signIn = function(data) {
   return $.ajax({
     url: config.apiUrl + '/sign-in',
     method: 'POST',
@@ -17,7 +17,7 @@ const signIn = function (data) {
   })
 }
 
-const signOut = function () {
+const signOut = function() {
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     method: 'DELETE',
@@ -27,7 +27,7 @@ const signOut = function () {
   })
 }
 
-const changePassword = function (data) {
+const changePassword = function(data) {
   return $.ajax({
     url: config.apiUrl + '/change-password',
     method: 'PATCH',
@@ -35,13 +35,6 @@ const changePassword = function (data) {
       Authorization: 'Token token=' + store.user.token
     },
     data: data
-  })
-}
-
-const getRestaurants = function () {
-  return $.ajax({
-    url: config.apiUrl + '/locations',
-    method: 'GET'
   })
 }
 
@@ -55,7 +48,7 @@ const getFavorites = () => {
   })
 }
 
-const addToFavorites = (location) => {
+const addToFavorites = location => {
   return $.ajax({
     url: config.apiUrl + '/favorites',
     method: 'POST',
@@ -82,7 +75,7 @@ const updateFavorites = (id, data) => {
   })
 }
 
-const removeFavorite = (id) => {
+const removeFavorite = id => {
   return $.ajax({
     url: config.apiUrl + '/favorites/' + id,
     method: 'DELETE',
@@ -97,7 +90,6 @@ module.exports = {
   signIn,
   signOut,
   changePassword,
-  getRestaurants,
   getFavorites,
   addToFavorites,
   updateFavorites,

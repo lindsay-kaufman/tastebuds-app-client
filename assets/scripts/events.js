@@ -2,59 +2,47 @@ const getFormFields = require('../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 
-const onSignUp = function (event) {
+const onSignUp = function(event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
-  api.signUp(data)
+  api
+    .signUp(data)
     .then(ui.signUpSuccessful)
     .catch(ui.signUpFailed)
 }
 
-const onSignIn = function (event) {
+const onSignIn = function(event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
-  api.signIn(data)
+  api
+    .signIn(data)
     .then(ui.signInSuccessful)
     .catch(ui.signInFailed)
 }
 
-const onSignOut = function () {
-  api.signOut()
+const onSignOut = function() {
+  api
+    .signOut()
     .then(ui.signOutSuccessful)
     .catch()
 }
 
-const onChangePassword = function (event) {
+const onChangePassword = function(event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
-  api.changePassword(data)
+  api
+    .changePassword(data)
     .then(ui.changePasswordSuccessful)
     .catch(ui.changePasswordFailed)
 }
 
-const onExploreRestaurants = function (event) {
+const onViewFavorites = event => {
   event.preventDefault()
-  api.getRestaurants()
-    .then(ui.getRestaurantsSuccess)
-    .catch()
-
-  $('#exploreRestaurantsButton').hide()
-  $('#hideRestaurantsButton').show()
-}
-
-const onHideRestaurants = function () {
-  $('.restaurants-title').hide()
-  $('#restaurants-content').hide()
-  $('#hideRestaurantsButton').hide()
-  $('#exploreRestaurantsButton').show()
-}
-
-const onViewFavorites = (event) => {
-  event.preventDefault()
-  api.getFavorites()
+  api
+    .getFavorites()
     .then(ui.getFavoritesSuccess)
     .catch(ui.failure)
 
@@ -70,7 +58,7 @@ const onHideFavorites = () => {
 }
 
 const favorites = [] // clears when user logs out
-const onAddFavorite = (event) => {
+const onAddFavorite = event => {
   event.preventDefault()
   const location = $(event.target).data('id')
   // console.log(location)
@@ -78,37 +66,38 @@ const onAddFavorite = (event) => {
     return favorites
   } else {
     favorites.push(location)
-    api.addToFavorites(location)
+    api
+      .addToFavorites(location)
       .then(() => onViewFavorites(event))
       .catch(ui.failure)
   }
 }
 
-const onUpdateFavorite = (event) => {
+const onUpdateFavorite = event => {
   event.preventDefault()
   const id = $(event.target).data('id')
   const form = event.target
   const data = getFormFields(form)
-  api.updateFavorites(id, data)
+  api
+    .updateFavorites(id, data)
     .then(() => onViewFavorites(event))
     .catch(ui.failure)
 }
 
-const onRemoveFavorite = (event) => {
+const onRemoveFavorite = event => {
   event.preventDefault()
   const id = $(event.target).data('id')
-  api.removeFavorite(id)
+  api
+    .removeFavorite(id)
     .then(() => onViewFavorites(event))
     .catch(ui.failure)
 }
 
-const addEventHandlers = function () {
+const addEventHandlers = function() {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('click', onSignOut)
   $('#change-password-forms').on('submit', onChangePassword)
-  $('#exploreRestaurantsButton').on('click', onExploreRestaurants)
-  $('#hideRestaurantsButton').on('click', onHideRestaurants)
   $('#getFavoritesButton').on('click', onViewFavorites)
   $('#restaurants-content').on('click', '.create-favorite', onAddFavorite)
   $('#favorites-content').on('submit', '.update-favorite', onUpdateFavorite)
