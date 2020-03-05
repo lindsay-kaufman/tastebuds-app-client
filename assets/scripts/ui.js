@@ -1,8 +1,7 @@
 const store = require('./store')
-const restaurantsTemplate = require('./templates/restaurants-listings.handlebars')
 const favoritesTemplate = require('./templates/favorites-listings.handlebars')
 
-const signUpSuccessful = function() {
+const signUpSuccessful = function () {
   $('#sign-up').hide()
   $('.homepage-message')
     .show()
@@ -12,16 +11,16 @@ const signUpSuccessful = function() {
 }
 // add signInSuccessful callback for automatic sign in
 
-const signUpFailed = function() {
+const signUpFailed = function () {
   $('.homepage-message')
     .show()
     .html('Hmm... looks like something went wrong here. Try again!')
-  $('#sign-up').each(function() {
+  $('#sign-up').each(function () {
     this.reset()
   })
 }
 
-const signInSuccessful = function(response) {
+const signInSuccessful = function (response) {
   store.user = response.user
   $('#map').show()
   $('#pac-input').show()
@@ -33,16 +32,16 @@ const signInSuccessful = function(response) {
   $('favorite-place-button').hide()
 }
 
-const signInFailed = function() {
+const signInFailed = function () {
   $('.homepage-message')
     .show()
     .html('Hmm... looks like something went wrong here. Try again!')
-  $('#sign-in').each(function() {
+  $('#sign-in').each(function () {
     this.reset()
   })
 }
 
-const signOutSuccessful = function() {
+const signOutSuccessful = function () {
   $('#sign-in').show()
   $('#sign-up').show()
   $('#footer').hide()
@@ -60,13 +59,13 @@ const changePasswordSuccessful = response => {
   $('.change-password-message')
     .show()
     .html('Your password has been updated!')
-  $('#change-password-forms').each(function() {
+  $('#change-password-forms').each(function () {
     this.reset()
   })
 }
 
 const changePasswordFailed = () => {
-  $('#change-password-forms').each(function() {
+  $('#change-password-forms').each(function () {
     this.reset()
   })
   $('.change-password-message')

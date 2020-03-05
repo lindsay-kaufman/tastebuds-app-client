@@ -2,7 +2,7 @@ const getFormFields = require('../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 
-const onSignUp = function(event) {
+const onSignUp = function (event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
@@ -12,7 +12,7 @@ const onSignUp = function(event) {
     .catch(ui.signUpFailed)
 }
 
-const onSignIn = function(event) {
+const onSignIn = function (event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
@@ -22,14 +22,14 @@ const onSignIn = function(event) {
     .catch(ui.signInFailed)
 }
 
-const onSignOut = function() {
+const onSignOut = function () {
   api
     .signOut()
     .then(ui.signOutSuccessful)
     .catch()
 }
 
-const onChangePassword = function(event) {
+const onChangePassword = function (event) {
   event.preventDefault()
   const form = event.target
   const data = getFormFields(form)
@@ -57,20 +57,20 @@ const onHideFavorites = () => {
   $('.favorites-title').hide()
 }
 
-const favorites = [] // clears when user logs out
 const onAddFavorite = event => {
   event.preventDefault()
-  const location = $(event.target).data('id')
-  // console.log(location)
-  if (favorites.includes(location)) {
-    return favorites
-  } else {
-    favorites.push(location)
-    api
-      .addToFavorites(location)
-      .then(() => onViewFavorites(event))
-      .catch(ui.failure)
-  }
+  // const favorite = $(event.target).parent()
+  const placeName = $('#place-name').html()
+  const placeId = $('#place-id').html()
+  const placeGeometry = $('#place-geometry').html()
+  console.log(placeName)
+  console.log(placeId)
+  console.log(placeGeometry)
+  api
+    .addToFavorites(placeName, placeId, placeGeometry)
+    .then(() => onViewFavorites(event))
+    .then(console.log('Success!'))
+    .catch(ui.failure)
 }
 
 const onUpdateFavorite = event => {
@@ -93,7 +93,7 @@ const onRemoveFavorite = event => {
     .catch(ui.failure)
 }
 
-const addEventHandlers = function() {
+const addEventHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('click', onSignOut)
@@ -104,6 +104,7 @@ const addEventHandlers = function() {
   $('#favorites-content').on('click', '.remove', onRemoveFavorite)
   $('#clearFavoritesButton').on('click', onHideFavorites)
   $('.close').on('click', () => $('.change-password-message').html(''))
+  $('#map').on('click', '#favorite-place-button', onAddFavorite)
 }
 
 module.exports = {
