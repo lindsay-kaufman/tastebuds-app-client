@@ -3,11 +3,6 @@ const favoritesTemplate = require('./templates/favorites-listings.handlebars')
 
 const signUpSuccessful = function () {
   $('#sign-up').hide()
-  $('.homepage-message')
-    .show()
-    .html(
-      'Thanks for signing up for TasteBuds! Sign in to start adding restaurants to your favorites.'
-    )
 }
 // add signInSuccessful callback for automatic sign in
 
@@ -28,8 +23,9 @@ const signInSuccessful = function (response) {
   $('#getFavoritesButton').show()
   $('#sign-up').hide()
   $('#sign-in').hide()
-  $('.homepage-message').hide()
   $('favorite-place-button').hide()
+  $('#navbar-message').show()
+  $('#homepage-message').hide()
 }
 
 const signInFailed = function () {
@@ -53,6 +49,8 @@ const signOutSuccessful = function () {
   $('.favorites-title').hide()
   $('#pac-input').hide()
   $('#map').hide()
+  $('#navbar-message').hide()
+  $('#homepage-message').show()
 }
 
 const changePasswordSuccessful = response => {

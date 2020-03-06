@@ -14,4 +14,5 @@ $(() => {
   $('#footer').hide()
   $('#map').hide()
   $('#pac-input').hide()
+  $('#navbar-message').hide()
 })
