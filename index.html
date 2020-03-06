@@ -1,103 +1,318 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>TasteBuds</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <title>TasteBuds</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-  <!-- Do not add `link` tags-->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Do not add `script` tags-->
+    <script
+      src="public/vendor.js"
+      type="text/javascript"
+      charset="utf-8"
+      defer
+    ></script>
+    <script
+      src="public/application.js"
+      type="text/javascript"
+      charset="utf-8"
+      defer
+    ></script>
+    <style>
+      #map {
+        width: 100%;
+        height: 400px;
+        background-color: white;
+      }
 
-  <!-- Do not add `script` tags-->
-  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-</head>
+      #pac-input {
+        background-color: #fff;
+        font-size: 15px;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
 
-<body>
-  <nav>
-    <h1>TasteBuds</h1>
-    <div class="fav-buttons">
-      <button id="getFavoritesButton" class="btn btn-outline-light">View Your Favorites</button>
-      <button id="clearFavoritesButton" class="btn btn-outline-light">Hide Favorites</button>
-      <button id="exploreRestaurantsButton" class="btn btn-outline-light">Explore Our Restaurants</button>
-      <button id="hideRestaurantsButton" class="btn btn-outline-light">Hide Restaurants</button>
-    </div>
-  </nav>
+      #infowindow-content {
+        color: #000;
+        font-size: 15px;
+        text-overflow: ellipsis;
+      }
+    </style>
+  </head>
 
-  <div class="container" id="homepage">
-    <div class="row">
-      <form class="input-group" id="sign-up">
-        <fieldset>
-          <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[email]" type="email" placeholder="email" required>
-          <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[password]" type="password" placeholder="password" required>
-          <input class="col-8 col-lg-3 mb-2 credentials" name="credentials[password_confirmation]" type="password" placeholder="confirm password" required>
-          <input type="submit" class="col-6 col-lg-2 btn btn-outline-light" value="Sign Up">
-        </fieldset>
-      </form>
-    </div>
-    <div class="row">
-      <form class="input-group" id="sign-in">
-        <fieldset>
-          <input class="col-8 col-lg-4 mb-2 credentials" name="credentials[email]" type="email" placeholder="email" required>
-          <input class="col-8 col-lg-4 mb-2 credentials" name="credentials[password]" type="password" placeholder="password" required>
-          <input type="submit" class="col-6 col-lg-2 btn btn-outline-light" value="Sign In">
-        </fieldset>
-      </form>
-    </div>
-  </div>
-  <p class="homepage-message"></p>
-
-  <main>
-    <p class="favorites-title"></p>
-    <div id="favorites-content" class="favorites"></div>
-    <p class="restaurants-title"></p>
-    <div id="restaurants-content" class="restaurants"></div>
-  </main>
-
-  <footer>
-    <div class="footer-buttons" id="footer">
-      <div class="container text-center my-5">
-        <button class="btn btn-outline-light" id="sign-out">Sign Out</button>
-      </div>
-      <div class="container text-center my-5">
-        <button type="button" class="btn btn-outline-light" id="change-password-button" data-toggle="modal" data-target="#change-password-modal">
-          Change Password
+  <body>
+    <nav class="navbar">
+      <h1>TasteBuds</h1>
+      <p id="navbar-message">Welcome to TasteBuds! Find your favorite restaurants.</p>
+      <div class="fav-buttons">
+        <button id="getFavoritesButton" class="btn btn-outline-light">
+          View Your Favorites
         </button>
+        <button id="clearFavoritesButton" class="btn btn-outline-light">
+          Hide Favorites
+        </button>
+      </div>
+    </nav>
 
-        <div class="modal fade" id="change-password-modal" tabindex="-1">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="title" id="change-password-modal-label">Change Password</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+    <p id="homepage-message">Welcome to TasteBuds!</p><br>
+    <div class="container" id="homepage">
+      <div class="row">
+        <form class="input-group" id="sign-up">
+          <fieldset>
+            <input
+              class="col-8 col-lg-3 mb-2 credentials"
+              name="credentials[email]"
+              type="email"
+              placeholder="email"
+              required
+            />
+            <input
+              class="col-8 col-lg-3 mb-2 credentials"
+              name="credentials[password]"
+              type="password"
+              placeholder="password"
+              required
+            />
+            <input
+              class="col-8 col-lg-3 mb-2 credentials"
+              name="credentials[password_confirmation]"
+              type="password"
+              placeholder="confirm password"
+              required
+            />
+            <input
+              type="submit"
+              class="col-6 col-lg-2 btn btn-outline-light"
+              value="Sign Up"
+            />
+          </fieldset>
+        </form>
+      </div>
+      <div class="row">
+        <form class="input-group" id="sign-in">
+          <fieldset>
+            <input
+              class="col-8 col-lg-4 mb-2 credentials"
+              name="credentials[email]"
+              type="email"
+              placeholder="email"
+              required
+            />
+            <input
+              class="col-8 col-lg-4 mb-2 credentials"
+              name="credentials[password]"
+              type="password"
+              placeholder="password"
+              required
+            />
+            <input
+              type="submit"
+              class="col-6 col-lg-2 btn btn-outline-light"
+              value="Sign In"
+            />
+          </fieldset>
+        </form>
+      </div>
+      <div>
+    </div>
+    </div>
+    
 
-              <div>
-                <form class="col-12 mb-2 change-password" id="change-password-forms">
-                  <fieldset>
-                    <input class="passwords" name="passwords[old]" type="password" placeholder="old password" required>
-                    <input class="passwords" name="passwords[new]" type="password" placeholder="new password" required>
-                    <input class="btn btn-outline-light" type="submit" id="change-password-modal-button" value="Change Password">
-                  </fieldset>
-                </form>
-              </div>
+    <main>
+      <!-- Map -->
+      <div>
+        <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Search"
+        />
+      </div>
+      <div id="map"></div>
+      <!-- end map-->
 
-              <div>
-                <div class="modal-footer">
-                  <p class="change-password-message"></p>
+      <p class="favorites-title"></p>
+      <div id="favorites-content" class="favorites"></div>
+    </main>
+
+    <footer>
+      <div class="footer-buttons" id="footer">
+        <div class="container text-center my-5">
+          <button class="btn btn-outline-light" id="sign-out">Sign Out</button>
+        </div>
+        <div class="container text-center my-5">
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            id="change-password-button"
+            data-toggle="modal"
+            data-target="#change-password-modal"
+          >
+            Change Password
+          </button>
+
+          <div class="modal fade" id="change-password-modal" tabindex="-1">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="title" id="change-password-modal-label">
+                    Change Password
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div>
+                  <form
+                    class="col-12 mb-2 change-password"
+                    id="change-password-forms"
+                  >
+                    <fieldset>
+                      <input
+                        class="passwords"
+                        name="passwords[old]"
+                        type="password"
+                        placeholder="old password"
+                        required
+                      />
+                      <input
+                        class="passwords"
+                        name="passwords[new]"
+                        type="password"
+                        placeholder="new password"
+                        required
+                      />
+                      <input
+                        class="btn btn-outline-light"
+                        type="submit"
+                        id="change-password-modal-button"
+                        value="Change Password"
+                      />
+                    </fieldset>
+                  </form>
+                </div>
+
+                <div>
+                  <div class="modal-footer">
+                    <p class="change-password-message"></p>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
 
+    <!--Map Initialize-->
+    <script>
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {
+            lat: 42.358,
+            lng: -71.059
+          },
+          zoom: 12
+        })
 
-  </footer>
-</body>
+        // --- SEARCH BOX --- //
 
+        // Initialize search box and autocomplete
+        const input = document.getElementById('pac-input')
+        const searchBox = new google.maps.places.SearchBox(input)
+        const autocomplete = new google.maps.places.Autocomplete(input)
+        autocomplete.bindTo('bounds', map)
+
+        // Limit search results to maps current viewport
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds())
+        })
+
+        // Data fields for autocomplete
+        autocomplete.setFields([
+          'name',
+          'place_id',
+          'formatted_address',
+          'geometry'
+        ])
+
+        // Set search box to top left of map
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
+
+        // --- SEARCH BOX UP END --- //
+
+        // --- MARKERS & INFO WINDOWS --- //
+
+        // Initialize info windows
+        infoWindow = new google.maps.InfoWindow()
+        let infoWindowContent
+        infoWindow.setContent(infoWindowContent)
+
+        // Initialize markers and open info windows on 'click'
+        const marker = new google.maps.Marker({ map: map })
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker)
+        })
+
+        autocomplete.addListener('place_changed', function() {
+          infoWindow.close()
+
+          // Get 'place' information from Google API and show it in the info window
+          // Use this information for API calls
+          const place = autocomplete.getPlace()
+          infoWindowContent = `
+          <div id="infowindow-content">
+            <span id="place-name" class="title">${place.name}</span><br>
+            <span id="place-address">${place.formatted_address}</span><br><br>
+            <span><button type="button" id="favorite-place-button">Add to Favorites</button></span>
+            <span id="place-id">${place.place_id}</span><br>
+            <span id="place-geometry">${place.geometry.location}</span>
+          </div>`
+          infoWindow.setContent(infoWindowContent)
+          if (!place.geometry) {
+            return
+          }
+
+          // Set place to the viewport
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport)
+          } else {
+            map.setCenter(place.geometry.viewport)
+            map.setZoom(8)
+          }
+
+          // Set position of marker using place ID and location
+          marker.setPlace({
+            placeId: place.place_id,
+            location: place.geometry.location
+          })
+          // console.log('Place: ', place)
+          // console.log('Place.name: ', place.name)
+          // console.log('Place.geometry.location: ', place.geometry.location)
+
+          marker.setVisible(true)
+
+          infoWindow.open(map, marker)
+        })
+
+        // --- MARKERS & INFO WINDOWS END --- //
+      }
+    </script>
+
+    <!-- Google Map -->
+    <script
+      type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC8-eiMsBGW-FFpstCDSeIwTNwqkQRraKM&callback=initMap"
+    ></script>
+  </body>
 </html>
+
+<!-- To Do
+  - button should have an on click event handler to push 'place' into favorites
+  - capture place object, send to api
+-->

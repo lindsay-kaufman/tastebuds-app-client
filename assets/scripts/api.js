@@ -38,16 +38,6 @@ const changePassword = function (data) {
   })
 }
 
-const getRestaurants = function () {
-  return $.ajax({
-    url: config.apiUrl + '/locations',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
-
 const getFavorites = () => {
   return $.ajax({
     url: config.apiUrl + '/favorites',
@@ -58,7 +48,7 @@ const getFavorites = () => {
   })
 }
 
-const addToFavorites = (location) => {
+const addToFavorites = (placeName, placeId, placeGeometry, placeAddress) => {
   return $.ajax({
     url: config.apiUrl + '/favorites',
     method: 'POST',
@@ -68,7 +58,10 @@ const addToFavorites = (location) => {
     data: {
       favorite: {
         user_id: store.user.id,
-        location_id: location
+        google_place_id: placeId,
+        google_place_name: placeName,
+        google_place_location: placeGeometry,
+        google_formatted_address: placeAddress
       }
     }
   })
@@ -85,7 +78,7 @@ const updateFavorites = (id, data) => {
   })
 }
 
-const removeFavorite = (id) => {
+const removeFavorite = id => {
   return $.ajax({
     url: config.apiUrl + '/favorites/' + id,
     method: 'DELETE',
@@ -100,7 +93,6 @@ module.exports = {
   signIn,
   signOut,
   changePassword,
-  getRestaurants,
   getFavorites,
   addToFavorites,
   updateFavorites,

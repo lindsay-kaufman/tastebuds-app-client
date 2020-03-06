@@ -4,20 +4,14 @@ body {
   background-color: $main-color;
   color: $white;
   font-family: 'Bree Serif', serif;
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
+  text-align: center;
 
   p {
     font-size: 20px;
     text-align: center;
   }
-
-  nav {
-    background: darken($main-color, 15%);
-    color: $white;
-    outline: none;
-    padding: 1rem;
-    width: 100%;
 
     h1 {
       color: $white;
@@ -30,6 +24,16 @@ body {
       display: flex;
       justify-content: center;
     }
+  }
+
+  .navbar {
+    background: darken($main-color, 15%);
+    color: $white;
+    display: block;
+    outline: none;
+    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
   }
 
   #homepage {
@@ -76,21 +80,9 @@ body {
         height: 180px;
       }
     }
-
-    #restaurants-content {
-      @include make-row;
-      line-height: 0.85;
-      max-height: 700px;
-      outline: none;
-      overflow: scroll;
-      padding: 20px;
-      text-align: center;
-      width: 100%;
-    }
   }
 
-  .favorites-title,
-  .restaurants-title {
+  .favorites-title {
     color: $white;
     font-family: 'Lobster Two', cursive;
     font-size: 45px;
@@ -125,10 +117,40 @@ body {
       justify-content: center;
     }
   }
-}
+
 
 .btn-outline-light {
   color: $white;
   border-color: $white;
   font-weight: 600;
 }
+
+#place-geometry,
+#place-id {
+  color: white;
+}
+
+#map {
+  width: 700px;
+  margin: 0 auto;
+  @media (max-width: 800px) { 
+    width: 500px;
+   }
+   @media (max-width: 560px) {
+     width: 300px;
+   }
+}
+
+#navbar-message, #homepage-message {
+  color: white;
+  font-size: 30px;
+  font-family: 'Bree Serif', serif;
+}
+
+// #marker {
+//   background-color: red;
+//   background-size: cover;
+//   width: 50%;
+//   height: 50%;
+//   border-radius: 50%;
+// }

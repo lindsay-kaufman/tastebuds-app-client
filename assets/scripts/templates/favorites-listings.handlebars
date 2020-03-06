@@ -2,10 +2,9 @@
 
 {{#each favorites as |favorite|}}
   <section data-id="{{favorite.id}}">
-
-    <p>
-      <h4> {{favorite.location.name}} </h4>
-      {{favorite.location.cuisine}} - {{favorite.location.area}}
+    <p> 
+      <h4> {{favorite.google_place_name}} </h4>
+      {{favorite.google_formatted_address}}
       <h6> Comments: {{#if favorite.notes}}
           {{favorite.notes}} </h6>
       {{/if}}
