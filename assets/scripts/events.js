@@ -63,11 +63,12 @@ const onAddFavorite = event => {
   const placeName = $('#place-name').html()
   const placeId = $('#place-id').html()
   const placeGeometry = $('#place-geometry').html()
+  const placeAddress = $('#place-address').html()
   console.log(placeName)
   console.log(placeId)
   console.log(placeGeometry)
   api
-    .addToFavorites(placeName, placeId, placeGeometry)
+    .addToFavorites(placeName, placeId, placeGeometry, placeAddress)
     .then(() => onViewFavorites(event))
     .then(console.log('Success!'))
     .catch(ui.failure)

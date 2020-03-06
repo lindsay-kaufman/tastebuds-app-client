@@ -48,7 +48,7 @@ const getFavorites = () => {
   })
 }
 
-const addToFavorites = (placeName, placeId, placeGeometry) => {
+const addToFavorites = (placeName, placeId, placeGeometry, placeAddress) => {
   return $.ajax({
     url: config.apiUrl + '/favorites',
     method: 'POST',
@@ -60,7 +60,8 @@ const addToFavorites = (placeName, placeId, placeGeometry) => {
         user_id: store.user.id,
         google_place_id: placeId,
         google_place_name: placeName,
-        google_place_location: placeGeometry
+        google_place_location: placeGeometry,
+        google_formatted_address: placeAddress
       }
     }
   })
