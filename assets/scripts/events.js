@@ -60,18 +60,13 @@ const onHideFavorites = () => {
 
 const onAddFavorite = event => {
   event.preventDefault()
-  // const favorite = $(event.target).parent()
   const placeName = $('#place-name').html()
   const placeId = $('#place-id').html()
   const placeGeometry = $('#place-geometry').html()
   const placeAddress = $('#place-address').html()
-  console.log(placeName)
-  console.log(placeId)
-  console.log(placeGeometry)
   api
     .addToFavorites(placeName, placeId, placeGeometry, placeAddress)
     .then(() => onViewFavorites(event))
-    .then(console.log('Success!'))
     .catch(ui.failure)
 }
 
@@ -95,6 +90,15 @@ const onRemoveFavorite = event => {
     .catch(ui.failure)
 }
 
+const onFindFavorite = event => {
+  event.preventDefault()
+  const id = $(event.target).data('id')
+  api
+    .findFavorite(id)
+    .then(ui.findFavoriteSuccess)
+    .catch(ui.failure)
+}
+
 const addEventHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -104,6 +108,7 @@ const addEventHandlers = function () {
   $('#restaurants-content').on('click', '.create-favorite', onAddFavorite)
   $('#favorites-content').on('submit', '.update-favorite', onUpdateFavorite)
   $('#favorites-content').on('click', '.remove', onRemoveFavorite)
+  $('#favorites-content').on('click', '.find', onFindFavorite)
   $('#clearFavoritesButton').on('click', onHideFavorites)
   $('.close').on('click', () => $('.change-password-message').html(''))
   $('#map').on('click', '#favorite-place-button', onAddFavorite)

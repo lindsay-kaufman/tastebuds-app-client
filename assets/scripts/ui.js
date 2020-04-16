@@ -82,6 +82,10 @@ const getFavoritesSuccess = response => {
     .html(favoritesHTML)
 }
 
+const findFavoriteSuccess = response => {
+  console.log(response)
+}
+
 const failure = () => {
   // console.error(error)
 }
@@ -95,5 +99,6 @@ module.exports = {
   changePasswordSuccessful,
   changePasswordFailed,
   getFavoritesSuccess,
+  findFavoriteSuccess,
   failure
 }
