@@ -1,7 +1,7 @@
 const getFormFields = require('../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
-const store = require('./store.js')
+// const store = require('./store.js')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -90,14 +90,14 @@ const onRemoveFavorite = event => {
     .catch(ui.failure)
 }
 
-const onFindFavorite = event => {
-  event.preventDefault()
-  const id = $(event.target).data('id')
-  api
-    .findFavorite(id)
-    .then(ui.findFavoriteSuccess)
-    .catch(ui.failure)
-}
+// const onFindFavorite = event => {
+//   event.preventDefault()
+//   const id = $(event.target).data('id')
+//   api
+//     .findFavorite(id)
+//     .then(ui.findFavoriteSuccess)
+//     .catch(ui.failure)
+// }
 
 const addEventHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
@@ -105,13 +105,12 @@ const addEventHandlers = function () {
   $('#sign-out').on('click', onSignOut)
   $('#change-password-forms').on('submit', onChangePassword)
   $('#getFavoritesButton').on('click', onViewFavorites)
-  $('#restaurants-content').on('click', '.create-favorite', onAddFavorite)
   $('#favorites-content').on('submit', '.update-favorite', onUpdateFavorite)
   $('#favorites-content').on('click', '.remove', onRemoveFavorite)
-  $('#favorites-content').on('click', '.find', onFindFavorite)
   $('#clearFavoritesButton').on('click', onHideFavorites)
   $('.close').on('click', () => $('.change-password-message').html(''))
   $('#map').on('click', '#favorite-place-button', onAddFavorite)
+  // $('#favorites-content').on('click', '.find', onFindFavorite)
 }
 
 module.exports = {
