@@ -82,19 +82,6 @@ const getFavoritesSuccess = response => {
     .html(favoritesHTML)
 }
 
-// const findFavoriteSuccess = response => {
-//   console.log(response)
-//   const map = document.getElementById('map')
-//   const google = document.getElementById('google')
-//   const marker = new google.maps.Marker({ map: map })
-//   marker.setPlace({
-//     placeId: response.favorite.place_id,
-//     location: response.favorite.google_place_location
-//   })
-
-//   marker.setVisible(true)
-// }
-
 const failure = () => {
   // console.error(error)
 }
@@ -108,6 +95,5 @@ module.exports = {
   changePasswordSuccessful,
   changePasswordFailed,
   getFavoritesSuccess,
-  // findFavoriteSuccess,
   failure
 }

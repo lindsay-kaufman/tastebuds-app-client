@@ -67,16 +67,6 @@ const addToFavorites = (placeName, placeId, placeGeometry, placeAddress) => {
   })
 }
 
-// const findFavorite = id => {
-//   return $.ajax({
-//     url: config.apiUrl + '/favorites/' + id,
-//     method: 'GET',
-//     headers: {
-//       Authorization: 'Token token=' + store.user.token
-//     }
-//   })
-// }
-
 const updateFavorites = (id, data) => {
   return $.ajax({
     url: config.apiUrl + '/favorites/' + id,
@@ -107,5 +97,4 @@ module.exports = {
   addToFavorites,
   updateFavorites,
   removeFavorite
-  // findFavorite
 }

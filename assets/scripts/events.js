@@ -90,15 +90,6 @@ const onRemoveFavorite = event => {
     .catch(ui.failure)
 }
 
-// const onFindFavorite = event => {
-//   event.preventDefault()
-//   const id = $(event.target).data('id')
-//   api
-//     .findFavorite(id)
-//     .then(ui.findFavoriteSuccess)
-//     .catch(ui.failure)
-// }
-
 const addEventHandlers = function () {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -110,7 +101,6 @@ const addEventHandlers = function () {
   $('#clearFavoritesButton').on('click', onHideFavorites)
   $('.close').on('click', () => $('.change-password-message').html(''))
   $('#map').on('click', '#favorite-place-button', onAddFavorite)
-  // $('#favorites-content').on('click', '.find', onFindFavorite)
 }
 
 module.exports = {
